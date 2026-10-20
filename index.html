@@ -5,252 +5,67 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#101114">
 <title>PRO EDIT Studio</title>
-
 <style>
-*{box-sizing:border-box}
-body{
-  margin:0;
-  background:#101114;
-  color:#fff;
-  font-family:Arial,sans-serif;
-}
-header{
-  padding:17px;
-  background:#191a20;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  border-bottom:1px solid #30313a;
-}
-.logo{font-size:23px;font-weight:bold}
-.logo span{color:#7c5cff}
-.badge{font-size:11px;color:#aaa}
-main{padding:14px;max-width:800px;margin:auto}
-h2{font-size:17px;margin:12px 0}
-.preview{
-  background:#050506;
-  border:1px solid #30313a;
-  border-radius:14px;
-  aspect-ratio:16/9;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  overflow:hidden;
-}
-video{
-  width:100%;
-  height:100%;
-  object-fit:contain;
-}
-.placeholder{text-align:center;color:#999}
-.placeholder div{font-size:42px;margin-bottom:8px}
-button,.pick{
-  border:0;
-  border-radius:10px;
-  padding:12px 14px;
-  background:#292a33;
-  color:white;
-  font-size:14px;
-  cursor:pointer;
-}
-.primary{background:#7357ff;font-weight:bold}
-.actions{
-  display:flex;
-  gap:8px;
-  flex-wrap:wrap;
-  margin:13px 0;
-}
-input[type=file]{display:none}
-.panel{
-  background:#191a20;
-  border:1px solid #30313a;
-  padding:13px;
-  border-radius:13px;
-  margin-top:14px;
-}
-.row{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px;
-}
-.small{font-size:12px;color:#aaa}
-#clips{display:flex;gap:9px;overflow-x:auto;margin-top:13px}
-.clip{
-  min-width:115px;
-  background:#252630;
-  border:1px solid #41424d;
-  padding:10px;
-  border-radius:9px;
-  font-size:12px;
-}
-.clip.active{border-color:#8a70ff}
-.clip button{padding:5px;margin-top:8px}
-input[type=range]{width:100%;accent-color:#8065ff}
-footer{text-align:center;color:#777;font-size:11px;padding:24px}
+*{box-sizing:border-box}body{margin:0;background:#101114;color:#fff;font-family:Arial,sans-serif}
+header{padding:15px 16px;background:#191a20;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #30313a;gap:10px}
+.logo{font-size:22px;font-weight:800;white-space:nowrap}.logo span{color:#7c5cff}.badge{font-size:11px;color:#aaa}
+main{padding:14px;max-width:1000px;margin:auto}h2{font-size:16px;margin:4px 0 12px}
+.preview{background:#050506;border:1px solid #30313a;border-radius:14px;aspect-ratio:16/9;display:flex;justify-content:center;align-items:center;overflow:hidden}
+video{width:100%;height:100%;object-fit:contain;background:#050506}.placeholder{text-align:center;color:#999;padding:16px}.placeholder div:first-child{font-size:36px;margin-bottom:8px}
+button,.pick{border:0;border-radius:10px;padding:11px 13px;background:#292a33;color:#fff;font-size:13px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:6px}
+button:disabled{opacity:.4;cursor:not-allowed}.primary{background:#7357ff;font-weight:bold}.danger{background:#8c2f3b}.success{background:#176b4b}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}input[type=file]{display:none}
+.panel{background:#191a20;border:1px solid #30313a;padding:13px;border-radius:13px;margin-top:14px}
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}.small{font-size:12px;color:#aaa;line-height:1.5}
+.timeline{margin-top:12px;display:flex;gap:10px;overflow-x:auto;padding:4px 2px 10px;scrollbar-width:thin}
+.clip{min-width:180px;max-width:240px;flex:0 0 68%;border:1px solid #41424b;border-radius:10px;padding:10px;background:#252630}
+.clip.active{border:2px solid #8a70ff;background:#2c2940}.clip-title{font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:8px}
+.filmstrip{height:45px;display:flex;align-items:stretch;background:#111;border-radius:5px;overflow:hidden;border:2px solid #7b69ff;margin:8px 0}
+.handle{width:17px;flex:0 0 17px;background:#9b87ff;touch-action:none;display:flex;align-items:center;justify-content:center;color:#161020;font-size:12px;font-weight:bold;cursor:ew-resize}
+.middle{flex:1;min-width:20px;display:flex;align-items:center;justify-content:center;color:#ccc;font-size:10px;touch-action:pan-y}
+.clip-meta{font-size:11px;color:#bbb;margin:6px 0}.clip-actions{display:flex;gap:6px;flex-wrap:wrap}.clip-actions button{padding:8px 9px;font-size:12px}
+.seek{width:100%;accent-color:#8a70ff;margin:10px 0}.time-row{display:flex;justify-content:space-between;gap:10px;font-size:12px;color:#ccc}
+.notice{padding:10px;border-radius:9px;background:#302817;color:#f4d99a;font-size:12px;line-height:1.5;margin-top:10px}
+footer{text-align:center;color:#777;font-size:11px;padding:18px}
+@media(min-width:700px){.clip{flex-basis:220px}.preview{max-height:520px}}
 </style>
 </head>
-
 <body>
-<header>
-  <div>
-    <div class="logo">PRO <span>EDIT</span> 🎬</div>
-    <div class="badge">YOUR MOBILE VIDEO STUDIO</div>
-  </div>
-  <div class="badge">STUDIO 2.0</div>
-</header>
-
+<header><div><div class="logo">PRO <span>EDIT</span> 🎬</div><div class="badge">YOUR MOBILE VIDEO STUDIO</div></div><div class="badge">STUDIO 2.1</div></header>
 <main>
-  <h2>Video Preview</h2>
-
-  <div class="preview" id="preview">
-    <div class="placeholder" id="placeholder">
-      <div>▶</div>
-      <div>अपना वीडियो चुनें</div>
-      <div class="small">आपकी क्लिप यहाँ दिखाई देगी</div>
-    </div>
-    <video id="player" controls playsinline hidden></video>
-  </div>
-
-  <div class="actions">
-    <label class="pick primary" for="videoInput">＋ वीडियो जोड़ें</label>
-    <input id="videoInput" type="file" accept="video/*" multiple>
-    <button id="playBtn">▶ Play</button>
-    <button id="pauseBtn">Ⅱ Pause</button>
-  </div>
-
-  <section class="panel">
-    <div class="row">
-      <h2>Project Timeline</h2>
-      <span id="clipCount" class="small">0 Clips</span>
-    </div>
-    <div class="small">चुनी गई क्लिप को चलाने के लिए उसकी कार्ड पर टैप करें।</div>
-    <div id="clips">
-      <div class="small">अभी कोई वीडियो नहीं है।</div>
-    </div>
-  </section>
-
-  <section class="panel">
-    <h2>✂️ Trim Preview</h2>
-    <div class="small">शुरुआत का समय</div>
-    <input id="startRange" type="range" min="0" max="0" value="0">
-    <div class="row small">
-      <span>Start: <b id="startText">0.0s</b></span>
-      <span>Duration: <b id="durationText">0.0s</b></span>
-    </div>
-    <button id="seekBtn">चुने गए समय पर जाएँ</button>
-  </section>
-
-  <section class="panel">
-    <h2>📤 Export</h2>
-    <div class="small">
-      यह शुरुआती प्रोटोटाइप है। वास्तविक MP4 एक्सपोर्ट अभी लागू नहीं है।
-    </div>
-    <button style="margin-top:12px" id="exportBtn">Export की स्थिति</button>
-    <div id="status" class="small" style="margin-top:10px"></div>
-  </section>
-</main>
-
-<footer>PRO EDIT STUDIO · Mobile First</footer>
-
+<h2>🎥 Video Preview</h2>
+<div class="preview" id="preview"><div class="placeholder" id="placeholder"><div>▶</div><div>अपनी वीडियो चुनें</div><div class="small">एक या कई वीडियो जोड़ सकते हैं</div></div><video id="player" controls playsinline hidden></video></div>
+<div class="actions"><label class="pick primary" for="videoInput">＋ वीडियो जोड़ें</label><input id="videoInput" type="file" accept="video/*" multiple><button id="playBtn">▶ Play</button><button id="pauseBtn">⏸ Pause</button></div>
+<section class="panel"><div class="row"><h2>🎞️ Project Timeline</h2><span id="clipCount" class="small">0 Clips</span></div><div class="small">क्लिप चुनें। बैंगनी पट्टी के बाएँ और दाएँ हैंडल खींचकर शुरुआत और अंत ट्रिम करें।</div><div id="timeline" class="timeline"><div class="small">अभी कोई वीडियो नहीं जोड़ी गई।</div></div></section>
+<section class="panel"><div class="row"><h2>✂️ Clip Editing</h2><span id="selectedName" class="small">कोई क्लिप नहीं</span></div><div class="small">Playhead को खिसकाएँ या टाइमलाइन पर टैप करके प्रीव्यू का समय चुनें।</div><input id="seek" class="seek" type="range" min="0" max="0" step="0.01" value="0"><div class="time-row"><span>शुरुआत: <b id="startText">0.00s</b></span><span>Playhead: <b id="playheadText">0.00s</b></span><span>अंत: <b id="endText">0.00s</b></span></div><div class="actions"><button id="splitBtn">🔪 Split at Playhead</button><button id="deleteBtn" class="danger">🗑️ Delete Clip</button><button id="undoBtn">↩️ Undo</button></div><div class="small">Trim की गई शुरुआत/अंत और Split की स्थिति हर क्लिप के लिए अलग रखी जाती है।</div></section>
+<section class="panel"><h2>📤 Export</h2><div class="small">यह संस्करण क्लिप चुनने, ट्रिम करने, Split, Delete और Undo का एडिटर देता है। ब्राउज़र में असली MP4 फ़ाइल बनाने/सभी क्लिप जोड़ने का एक्सपोर्ट अभी लागू नहीं है।</div><button id="exportBtn" class="success" style="margin-top:12px">Export जानकारी</button><div id="status" class="small" style="margin-top:10px" aria-live="polite">तैयार है। वीडियो जोड़ें।</div><div class="notice">ध्यान दें: वीडियो आपके ब्राउज़र में ही चुनी जाती हैं। पेज रीफ्रेश करने पर चुनी हुई क्लिपें हट जाएँगी।</div></section>
+</main><footer>PRO EDIT STUDIO · Mobile First</footer>
 <script>
-const input = document.getElementById('videoInput');
-const player = document.getElementById('player');
-const placeholder = document.getElementById('placeholder');
-const clipsBox = document.getElementById('clips');
-const clipCount = document.getElementById('clipCount');
-const startRange = document.getElementById('startRange');
-const startText = document.getElementById('startText');
-const durationText = document.getElementById('durationText');
-const status = document.getElementById('status');
-
-let clips = [];
-let activeIndex = -1;
-let currentURL = null;
-
-function loadClip(index) {
-  if (!clips[index]) return;
-  activeIndex = index;
-  if (currentURL) URL.revokeObjectURL(currentURL);
-  currentURL = URL.createObjectURL(clips[index].file);
-  player.src = currentURL;
-  player.hidden = false;
-  placeholder.hidden = true;
-  player.load();
-  renderClips();
-}
-
-function renderClips() {
-  clipsBox.innerHTML = '';
-  clipCount.textContent = clips.length + ' Clips';
-
-  if (!clips.length) {
-    clipsBox.innerHTML = '<div class="small">अभी कोई वीडियो नहीं है।</div>';
-    return;
-  }
-
-  clips.forEach((clip, index) => {
-    const card = document.createElement('div');
-    card.className = 'clip' + (index === activeIndex ? ' active' : '');
-
-    const name = document.createElement('div');
-    name.textContent = (index + 1) + '. ' + clip.file.name;
-
-    const select = document.createElement('button');
-    select.textContent = 'Preview';
-    select.onclick = () => loadClip(index);
-
-    card.append(name, select);
-    clipsBox.appendChild(card);
-  });
-}
-
-input.addEventListener('change', () => {
-  const files = Array.from(input.files || []);
-  files.filter(file => file.type.startsWith('video/'))
-       .forEach(file => clips.push({file}));
-
-  renderClips();
-
-  if (activeIndex === -1 && clips.length) loadClip(0);
-
-  status.textContent = files.length
-    ? 'वीडियो जोड़े गए।'
-    : 'कोई वीडियो नहीं चुना गया।';
-
-  input.value = '';
-});
-
-player.addEventListener('loadedmetadata', () => {
-  startRange.max = Math.max(0, player.duration || 0);
-  startRange.value = 0;
-  startText.textContent = '0.0s';
-  durationText.textContent =
-    Number.isFinite(player.duration)
-      ? player.duration.toFixed(1) + 's'
-      : 'Unknown';
-});
-
-startRange.addEventListener('input', () => {
-  startText.textContent = Number(startRange.value).toFixed(1) + 's';
-});
-
-document.getElementById('seekBtn').onclick = () => {
-  if (player.src) player.currentTime = Number(startRange.value);
-};
-
-document.getElementById('playBtn').onclick = () => {
-  if (player.src) player.play().catch(() => {});
-};
-
-document.getElementById('pauseBtn').onclick = () => player.pause();
-
-document.getElementById('exportBtn').onclick = () => {
-  status.textContent =
-    'MP4 Export अभी विकसित करना बाकी है। अभी कोई वीडियो एक्सपोर्ट नहीं हुआ।';
-};
-
-renderClips();
+const input=document.getElementById('videoInput'),player=document.getElementById('player'),placeholder=document.getElementById('placeholder'),timeline=document.getElementById('timeline'),clipCount=document.getElementById('clipCount'),seek=document.getElementById('seek'),selectedName=document.getElementById('selectedName'),startText=document.getElementById('startText'),endText=document.getElementById('endText'),playheadText=document.getElementById('playheadText'),statusBox=document.getElementById('status');
+let clips=[],activeId=null,nextId=1,objectUrl=null,playhead=0,undoStack=[],dragState=null,dragOriginal=null;
+function activeClip(){return clips.find(c=>c.id===activeId)||null}
+function fmt(n){return (Number.isFinite(n)?n:0).toFixed(2)+'s'}
+function say(m){statusBox.textContent=m}
+function snapshot(){undoStack.push({clips:clips.map(c=>({...c})),activeId,playhead});if(undoStack.length>30)undoStack.shift();updateEditor()}
+function undo(){const s=undoStack.pop();if(!s){say('Undo करने के लिए कोई पिछला बदलाव नहीं है।');return}clips=s.clips;activeId=clips.some(c=>c.id===s.activeId)?s.activeId:(clips[0]?.id??null);playhead=s.playhead;renderTimeline();if(activeClip())loadClip(activeId,true);else clearPlayer();say('पिछला बदलाव वापस कर दिया गया।')}
+function clearPlayer(){player.pause();player.removeAttribute('src');player.load();player.hidden=true;placeholder.hidden=false;if(objectUrl){URL.revokeObjectURL(objectUrl);objectUrl=null}seek.max=0;seek.value=0;selectedName.textContent='कोई क्लिप नहीं';startText.textContent=endText.textContent=playheadText.textContent='0.00s'}
+function loadClip(id,keepTime=false){const clip=clips.find(c=>c.id===id);if(!clip)return;activeId=id;if(objectUrl)URL.revokeObjectURL(objectUrl);objectUrl=URL.createObjectURL(clip.file);player.src=objectUrl;player.hidden=false;placeholder.hidden=true;player.load();player.onloadedmetadata=()=>{clip.duration=player.duration||clip.duration;clip.start=Math.max(0,Math.min(clip.start,clip.duration));clip.end=clip.end>0?Math.min(clip.end,clip.duration):clip.duration;playhead=keepTime?Math.max(clip.start,Math.min(playhead,clip.end)):clip.start;player.currentTime=playhead;updateEditor();renderTimeline()};selectedName.textContent=clip.file.name;renderTimeline()}
+function updateEditor(){const c=activeClip();if(!c){document.getElementById('splitBtn').disabled=true;document.getElementById('deleteBtn').disabled=true;document.getElementById('undoBtn').disabled=!undoStack.length;return}seek.min=c.start;seek.max=Math.max(c.start+0.01,c.end);seek.value=Math.max(c.start,Math.min(playhead,c.end));startText.textContent=fmt(c.start);endText.textContent=fmt(c.end);playheadText.textContent=fmt(playhead);selectedName.textContent=c.file.name;document.getElementById('splitBtn').disabled=!c.duration||playhead<=c.start+0.05||playhead>=c.end-0.05;document.getElementById('deleteBtn').disabled=false;document.getElementById('undoBtn').disabled=!undoStack.length}
+function renderTimeline(){clipCount.textContent=clips.length+(clips.length===1?' Clip':' Clips');timeline.innerHTML='';if(!clips.length){timeline.innerHTML='<div class="small">अभी कोई वीडियो नहीं जोड़ी गई।</div>';updateEditor();return}
+clips.forEach(c=>{const card=document.createElement('div');card.className='clip'+(c.id===activeId?' active':'');const title=document.createElement('div');title.className='clip-title';title.textContent=c.file.name;const strip=document.createElement('div');strip.className='filmstrip';const left=document.createElement('div');left.className='handle';left.textContent='❮';left.title='शुरुआत ट्रिम करें';const middle=document.createElement('div');middle.className='middle';middle.textContent=fmt(c.end-c.start);const right=document.createElement('div');right.className='handle';right.textContent='❯';right.title='अंत ट्रिम करें';strip.append(left,middle,right);const meta=document.createElement('div');meta.className='clip-meta';meta.textContent=`${fmt(c.start)} – ${fmt(c.end)} / ${fmt(c.duration)}`;const actions=document.createElement('div');actions.className='clip-actions';const btn=document.createElement('button');btn.textContent='Preview';btn.onclick=()=>loadClip(c.id);actions.appendChild(btn);card.append(title,strip,meta,actions);timeline.appendChild(card);middle.onclick=()=>loadClip(c.id);
+[left,right].forEach((h,side)=>{h.addEventListener('pointerdown',e=>{e.preventDefault();e.stopPropagation();snapshot();loadClip(c.id,true);dragState={id:c.id,side,startX:e.clientX,original:side===0?c.start:c.end,duration:Math.max(c.duration,.01),stripWidth:Math.max(strip.clientWidth-34,60)};h.setPointerCapture?.(e.pointerId)});h.addEventListener('pointermove',e=>{if(!dragState||dragState.id!==c.id||dragState.side!==side||!e.buttons)return;const cur=clips.find(x=>x.id===c.id);if(!cur)return;const delta=(e.clientX-dragState.startX)/dragState.stripWidth*dragState.duration;if(side===0)cur.start=Math.max(0,Math.min(dragState.original+delta,cur.end-.1));else cur.end=Math.min(cur.duration,Math.max(dragState.original+delta,cur.start+.1));playhead=side===0?cur.start:Math.min(playhead,cur.end);if(activeId===cur.id&&player.src){player.currentTime=playhead;updateEditor()}meta.textContent=`${fmt(cur.start)} – ${fmt(cur.end)} / ${fmt(cur.duration)}`;middle.textContent=fmt(cur.end-cur.start)});h.addEventListener('pointerup',()=>{if(dragState?.id===c.id){dragState=null;renderTimeline();say('क्लिप ट्रिम हुई।')}});h.addEventListener('pointercancel',()=>dragState=null)})});updateEditor()}
+input.addEventListener('change',()=>{const files=Array.from(input.files||[]).filter(f=>f.type.startsWith('video/'));if(!files.length){say('कोई वीडियो फ़ाइल नहीं चुनी गई।');return}snapshot();files.forEach(file=>clips.push({id:nextId++,file,duration:0,start:0,end:0}));const first=clips.length===files.length?clips[0]:clips[clips.length-files.length];renderTimeline();loadClip(first.id);say(files.length+' वीडियो जोड़ी गईं।');input.value=''});
+player.addEventListener('loadedmetadata',()=>{const c=activeClip();if(!c)return;c.duration=player.duration||0;if(!c.end||c.end>c.duration)c.end=c.duration;c.start=Math.min(c.start,Math.max(0,c.end-.1));playhead=Math.max(c.start,Math.min(playhead||c.start,c.end));player.currentTime=playhead;updateEditor();renderTimeline()});
+player.addEventListener('timeupdate',()=>{const c=activeClip();if(!c)return;playhead=player.currentTime;if(playhead>=c.end&&!player.paused){player.pause();player.currentTime=c.end;playhead=c.end}seek.value=Math.max(c.start,Math.min(playhead,c.end));playheadText.textContent=fmt(playhead);document.getElementById('splitBtn').disabled=playhead<=c.start+.05||playhead>=c.end-.05});
+player.addEventListener('ended',()=>{const c=activeClip();if(c){player.currentTime=c.end;playhead=c.end;updateEditor()}});
+seek.addEventListener('input',()=>{const c=activeClip();if(!c)return;playhead=Math.max(c.start,Math.min(Number(seek.value),c.end));player.currentTime=playhead;playheadText.textContent=fmt(playhead);updateEditor()});
+document.getElementById('playBtn').onclick=()=>{const c=activeClip();if(!c){say('पहले वीडियो जोड़ें।');return}if(player.currentTime<c.start||player.currentTime>=c.end)player.currentTime=c.start;player.play().catch(()=>say('वीडियो चलाने के लिए Play दोबारा दबाएँ।'))};
+document.getElementById('pauseBtn').onclick=()=>player.pause();
+document.getElementById('splitBtn').onclick=()=>{const c=activeClip();if(!c||playhead<=c.start+.05||playhead>=c.end-.05){say('Split करने के लिए क्लिप के बीच का समय चुनें।');return}snapshot();const second={...c,id:nextId++,start:playhead,end:c.end};c.end=playhead;clips.splice(clips.findIndex(x=>x.id===c.id)+1,0,second);renderTimeline();say('वीडियो Playhead पर दो क्लिप में बाँटी गई।')};
+document.getElementById('deleteBtn').onclick=()=>{const c=activeClip();if(!c)return;snapshot();const i=clips.findIndex(x=>x.id===c.id);clips.splice(i,1);if(clips.length)loadClip(clips[Math.min(i,clips.length-1)].id);else{activeId=null;clearPlayer();renderTimeline()}say('क्लिप हटाई गई। Undo से वापस ला सकते हैं।')};
+document.getElementById('undoBtn').onclick=undo;
+document.getElementById('exportBtn').onclick=()=>say('यह एडिटर प्रोटोटाइप है। Trim/Split/Delete एडिटिंग उपलब्ध है, लेकिन डाउनलोड करने योग्य MP4 एक्सपोर्ट अभी उपलब्ध नहीं है।');
+renderTimeline();updateEditor();
 </script>
 </body>
 </html>
